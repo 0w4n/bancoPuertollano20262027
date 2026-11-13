@@ -16,6 +16,13 @@ def cargarCliente(tipo):
 
         elif tipo == "guardado":
             return cargarClienteGuardado(num)
+        
+        else:
+            log.escribir(
+                "ERROR",
+                f"Intento de acceso a cliente no cargado: {num} (tipo={tipo})."
+            )
+            print(f"No se ha podido cargar el cliente. Inténtalo de nuevo.")
 
 
 def leerFichero(numCliente):
@@ -23,7 +30,7 @@ def leerFichero(numCliente):
     cliente = Cliente(numCliente)
 
     try:
-        with open(f"ficherosClientes/{numCliente}.txt", "r") as f:
+        with open(f"datosClientes/{numCliente}.txt", "r") as f:
 
             linea = f.readline()
 
@@ -75,7 +82,7 @@ def cargarClienteGuardado(numCliente):
             cliente.deposito.saldo = float(datos[2])
 
             return cliente
-
-    except FileNotFoundError:
+        
+    except FileNotFoundError as e:
         print("Primero tienes que cargar los datos de este cliente")
         return None
