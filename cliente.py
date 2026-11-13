@@ -18,6 +18,13 @@ def cargarCliente(tipo):
         elif tipo == "guardado":
             return cargarClienteGuardado(num)
 
+        else:
+                    log.escribir(
+                        "ERROR",
+                        f"Intento de acceso a cliente no cargado: {num} (tipo={tipo})."
+                    )
+                    print(f"No se ha podido cargar el cliente. Inténtalo de nuevo.")
+
 
 def leerFichero(numCliente):
 
