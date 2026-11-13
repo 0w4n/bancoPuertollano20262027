@@ -83,6 +83,6 @@ def cargarClienteGuardado(numCliente):
 
             return cliente
         
-    except FileNotFoundError as e:
+    except FileNotFoundError:
         print("Primero tienes que cargar los datos de este cliente")
         return None
