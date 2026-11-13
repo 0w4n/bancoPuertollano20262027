@@ -1,5 +1,6 @@
 from cliente import cargarCliente
 from logs import Log
+import os
 
 log = Log()
 
@@ -11,7 +12,8 @@ def menu():
 
         print("1) Cargar Datos Cliente")
         print("2) Consultar cuenta Deposito")
-        print("3) Salir")
+        print("3) Listar clientes cargados")
+        print("4) Salir")
 
         opt = input("Introduce la opción deseada: ")
 
@@ -25,8 +27,16 @@ def menu():
                 print(f"Cliente: {cliente.numero}")
                 print(f"Saldo cuenta: {cliente.cuenta.saldo} €")
                 print(f"Saldo depósito: {cliente.deposito.saldo} €")
-
+                
         elif opt == "3":
+            log.escribir("INFO", "LISTADO DE CLIENTES CARGADOS")
+            print("Clientes cargados:")
+            for filename in os.listdir("datosClientes"):
+                if filename.endswith(".txt"):
+                    numero_cliente = filename.split(".")[0]
+                    print(f"- Cliente número: {numero_cliente}")
+
+        elif opt == "4":
             log.escribir(
                 "INFO",
                 "FIN EJECUCIÓN"
