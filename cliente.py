@@ -64,7 +64,7 @@ def leerFichero(numCliente):
 def cargarClienteGuardado(numCliente):
 
     try:
-        with open(f"datosClientes/{numCliente}.txt", "r") as f:
+        with open(f"ficherosClientes/{numCliente}.txt", "r") as f:
 
             linea = f.readline()
             datos = linea.split(";")
