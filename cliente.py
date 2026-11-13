@@ -16,7 +16,7 @@ def cargarCliente(tipo):
 
         elif tipo == "guardado":
             return cargarClienteGuardado(num)
-        
+
         else:
             log.escribir(
                 "ERROR",
