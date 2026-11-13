@@ -46,7 +46,7 @@ def leerFichero(numCliente):
 
                 elif destino == "Deposito" and operacion == "Retirada":
                     cliente.deposito.retirar(cantidad)
-                    
+
                 else:
                     log.escribir("WARNING"
                         f"Línea {linea} del cliente {numCliente}:" 
