@@ -82,7 +82,7 @@ def cargarClienteGuardado(numCliente):
             cliente.deposito.saldo = float(datos[2])
 
             return cliente
-        
+
     except FileNotFoundError:
         print("Primero tienes que cargar los datos de este cliente")
         return None
