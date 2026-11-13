@@ -25,6 +25,8 @@ def leerFichero(numCliente):
     try:
         with open(f"ficherosClientes/{numCliente}.txt", "r") as f:
 
+            log.escribir("INFO", f"INICIO CARGA DEL CLIENTE {numCliente}") ##nuevo
+            
             linea = f.readline()
 
             while linea:
@@ -52,11 +54,15 @@ def leerFichero(numCliente):
         # Guardamos el estado final del cliente
         cliente.guardar()
 
+        log.escribir("INFO", f"CLIENTE {numCliente} CARGADO CORRECTAMENTE")##nuevo
+
+
         print("Datos del cliente cargados correctamente")
 
         return cliente
 
     except FileNotFoundError:
+        log.escribir("ERROR", f"NO EXISTE EL FICHERO DE MOVIMIENTOS DEL CLIENTE {numCliente}") ##nuevo
         print("El usuario no tiene ninguna cuenta con el banco")
         return None
 
