@@ -30,10 +30,19 @@ def leerFichero(numCliente):
             while linea:
 
                 datos = linea.strip().split(";")
-
-                cantidad = float(datos[0])
-                operacion = datos[1]
-                destino = datos[2]
+                
+                if not datos:
+                    continue
+                
+                try:
+                    cantidad = float(datos[0])
+                    operacion = datos[1]
+                    destino = datos[2]
+                except (ValueError, IndexError):
+                    log.escribir("ERROR",
+                                    f"Línea {linea} mal formada en el fichero del cliente "
+                                    f"{numCliente}: '{datos}'. Movimiento ignorado.")
+                    continue
 
                 if destino == "Cuenta" and operacion == "Ingreso":
                     cliente.cuenta.ingresar(cantidad)
