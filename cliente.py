@@ -62,6 +62,13 @@ def leerFichero(numCliente):
 
                 elif destino == "Deposito" and operacion == "Retirada":
                     cliente.deposito.retirar(cantidad)
+                else:
+                    log.escribir("WARNING"
+                        f"Línea {linea} del cliente {numCliente}:" 
+                        f"no se pudo reconocer el movimiento (operacion='{operacion}', destino='{destino}'). "
+                        f"El movimiento ha sido ignorado."
+                    )
+                    continue
 
                 linea = f.readline()
 
