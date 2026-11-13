@@ -17,6 +17,13 @@ def cargarCliente(tipo):
         elif tipo == "guardado":
             return cargarClienteGuardado(num)
 
+        else:
+            log.escribir(
+                "ERROR",
+                f"Intento de acceso a cliente no cargado: {num} (tipo={tipo})."
+            )
+            print(f"No se ha podido cargar el cliente. Inténtalo de nuevo.")
+
 
 def leerFichero(numCliente):
 
@@ -34,9 +41,18 @@ def leerFichero(numCliente):
                 contador = 0  # nuevo: movimientos válidos procesados
                 datos = linea.strip().split(";")
 
-                cantidad = float(datos[0])
-                operacion = datos[1]
-                destino = datos[2]
+                if not datos:
+                    continue
+
+                try:
+                    cantidad = float(datos[0])
+                    operacion = datos[1]
+                    destino = datos[2]
+                except (ValueError, IndexError):
+                    log.escribir("ERROR",
+                        f"Línea {linea} mal formada en el fichero del cliente "
+                        f"{numCliente}: '{datos}'. Movimiento ignorado.")
+                    continue
 
                 if destino == "Cuenta" and operacion == "Ingreso":
                     cliente.cuenta.ingresar(cantidad)
@@ -52,7 +68,6 @@ def leerFichero(numCliente):
 
                 elif destino == "Deposito" and operacion == "Retirada":
                     cliente.deposito.retirar(cantidad)
-                    contador += 1
 
                 linea = f.readline()
 
