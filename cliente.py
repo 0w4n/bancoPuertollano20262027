@@ -47,8 +47,8 @@ def leerFichero(numCliente):
                     destino = datos[2]
                 except (ValueError, IndexError):
                     log.escribir("ERROR",
-                                    f"Línea {linea} mal formada en el fichero del cliente "
-                                    f"{numCliente}: '{datos}'. Movimiento ignorado.")
+                        f"Línea {linea} mal formada en el fichero del cliente "
+                        f"{numCliente}: '{datos}'. Movimiento ignorado.")
                     continue
 
                 if destino == "Cuenta" and operacion == "Ingreso":
