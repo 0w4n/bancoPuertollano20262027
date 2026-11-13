@@ -30,7 +30,8 @@ def leerFichero(numCliente):
             linea = f.readline()
 
             while linea:
-
+                
+                contador = 0  # nuevo: movimientos válidos procesados
                 datos = linea.strip().split(";")
 
                 cantidad = float(datos[0])
@@ -39,20 +40,28 @@ def leerFichero(numCliente):
 
                 if destino == "Cuenta" and operacion == "Ingreso":
                     cliente.cuenta.ingresar(cantidad)
+                    contador += 1
 
                 elif destino == "Cuenta" and operacion == "Retirada":
                     cliente.cuenta.retirar(cantidad)
+                    contador += 1
 
                 elif destino == "Deposito" and operacion == "Ingreso":
                     cliente.deposito.ingresar(cantidad)
+                    contador += 1
 
                 elif destino == "Deposito" and operacion == "Retirada":
                     cliente.deposito.retirar(cantidad)
+                    contador += 1
 
                 linea = f.readline()
 
         # Guardamos el estado final del cliente
         cliente.guardar()
+
+        # nuevo: mostrar y registrar el contador (Tarea 7)
+        print(f"Movimientos procesados: {contador}")
+        log.escribir("INFO", f"MOVIMIENTOS PROCESADOS DEL CLIENTE {numCliente}: {contador}")
 
         log.escribir("INFO", f"CLIENTE {numCliente} CARGADO CORRECTAMENTE")##nuevo
 
