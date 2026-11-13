@@ -56,6 +56,11 @@ def leerFichero(numCliente):
 
         log.escribir("INFO", f"CLIENTE {numCliente} CARGADO CORRECTAMENTE")##nuevo
 
+                # nuevo: resumen de la carga (Tarea 3)
+        print(f"Cliente: {cliente.getNumero()}")
+        print(f"Saldo cuenta: {cliente.getCuenta().getSaldo()} €")
+        print(f"Saldo depósito: {cliente.getDeposito().getSaldo()} €")
+
 
         print("Datos del cliente cargados correctamente")
 
