@@ -11,7 +11,7 @@ class Log:
         if not os.path.exists("log"):
             os.mkdir("log")
 
-    def escribir(self, tipo, mensaje):                
+    def escribir(self, tipo, mensaje):
         fecha_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         with open(self.ruta, "a") as fichero:
