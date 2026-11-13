@@ -30,10 +30,10 @@ def leerFichero(numCliente):
             while linea:
 
                 datos = linea.strip().split(";")
-                
+
                 if not datos:
                     continue
-                
+
                 try:
                     cantidad = float(datos[0])
                     operacion = datos[1]
