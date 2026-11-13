@@ -4,6 +4,8 @@ from logs import Log
 log = Log()
 
 def menu():
+    
+    
 
     while True:
 
