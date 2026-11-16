@@ -17,6 +17,13 @@ def cargarCliente(tipo):
         elif tipo == "guardado":
             return cargarClienteGuardado(num)
 
+        else:
+            log.escribir(
+                "ERROR",
+                f"Intento de acceso a cliente no cargado: {num} (tipo={tipo})."
+            )
+            print(f"No se ha podido cargar el cliente. Inténtalo de nuevo.")
+
 
 def leerFichero(numCliente):
 
@@ -25,24 +32,39 @@ def leerFichero(numCliente):
     try:
         with open(f"ficherosClientes/{numCliente}.txt", "r") as f:
 
+            log.escribir("INFO", f"INICIO CARGA DEL CLIENTE {numCliente}") ##nuevo
+            
             linea = f.readline()
 
             while linea:
-
+                
+                contador = 0  # nuevo: movimientos válidos procesados
                 datos = linea.strip().split(";")
 
-                cantidad = float(datos[0])
-                operacion = datos[1]
-                destino = datos[2]
+                if not datos:
+                    continue
+
+                try:
+                    cantidad = float(datos[0])
+                    operacion = datos[1]
+                    destino = datos[2]
+                except (ValueError, IndexError):
+                    log.escribir("ERROR",
+                        f"Línea {linea} mal formada en el fichero del cliente "
+                        f"{numCliente}: '{datos}'. Movimiento ignorado.")
+                    continue
 
                 if destino == "Cuenta" and operacion == "Ingreso":
                     cliente.cuenta.ingresar(cantidad)
+                    contador += 1
 
                 elif destino == "Cuenta" and operacion == "Retirada":
                     cliente.cuenta.retirar(cantidad)
+                    contador += 1
 
                 elif destino == "Deposito" and operacion == "Ingreso":
                     cliente.deposito.ingresar(cantidad)
+                    contador += 1
 
                 elif destino == "Deposito" and operacion == "Retirada":
                     cliente.deposito.retirar(cantidad)
@@ -52,11 +74,24 @@ def leerFichero(numCliente):
         # Guardamos el estado final del cliente
         cliente.guardar()
 
+        # nuevo: mostrar y registrar el contador (Tarea 7)
+        print(f"Movimientos procesados: {contador}")
+        log.escribir("INFO", f"MOVIMIENTOS PROCESADOS DEL CLIENTE {numCliente}: {contador}")
+
+        log.escribir("INFO", f"CLIENTE {numCliente} CARGADO CORRECTAMENTE")##nuevo
+
+                # nuevo: resumen de la carga (Tarea 3)
+        print(f"Cliente: {cliente.getNumero()}")
+        print(f"Saldo cuenta: {cliente.getCuenta().getSaldo()} €")
+        print(f"Saldo depósito: {cliente.getDeposito().getSaldo()} €")
+
+
         print("Datos del cliente cargados correctamente")
 
         return cliente
 
     except FileNotFoundError:
+        log.escribir("ERROR", f"NO EXISTE EL FICHERO DE MOVIMIENTOS DEL CLIENTE {numCliente}") ##nuevo
         print("El usuario no tiene ninguna cuenta con el banco")
         return None
 

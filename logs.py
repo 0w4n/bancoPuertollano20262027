@@ -15,4 +15,7 @@ class Log:
         fecha_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         with open(self.ruta, "a") as fichero:
-            fichero.write(f"[{fecha_hora}] [{tipo.upper()}] {mensaje}\n")
+            if tipo.upper() in {"INFO", "WARNING", "ERROR"}:
+                fichero.write(f"[{fecha_hora}] [{tipo.upper()}] {mensaje}\n")
+            else:
+                fichero.write(f"[{fecha_hora}] [INFO] {mensaje}\n")

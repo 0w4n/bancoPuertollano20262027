@@ -45,6 +45,9 @@ class Cliente:
 
     def getDeposito(self):
         return self.deposito
+    
+    def getSaldoTotal(self):
+        return self.cuenta.getSaldo() + self.deposito.getSaldo()
 
     def guardar(self):
         if not os.path.exists("datosClientes"):
@@ -54,5 +57,6 @@ class Cliente:
             f.write(
                 f"{self.numero};"
                 f"{self.cuenta.getSaldo()};"
-                f"{self.deposito.getSaldo()}"
+                f"{self.deposito.getSaldo()};"
+                f"{self.getSaldoTotal()}"
             )
